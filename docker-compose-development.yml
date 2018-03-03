@@ -2,15 +2,16 @@ web:
   build: .
   dockerfile: Dockerfile-development
   links:
-   - db
+    - db
   ports:
-   - "8000:8000"
+    - "8000:8000"
   volumes:
-   - .:/usr/src/app/
+    - .:/usr/src/app/
   environment:
-   NODE_ENV: development
-   MONGO_URL: mongodb://db:27017/redY
+    VIRTUAL_HOST: redy.docker
+    NODE_ENV: development
+    MONGO_URL: mongodb://db:27017/redY
 db:
   image: mongo:latest
   ports:
-   - "27017:27017"
+    - "27017:27017"
