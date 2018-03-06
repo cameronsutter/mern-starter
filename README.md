@@ -34,6 +34,9 @@ and then go to http://localhost:8000
 
 6. `npm run lint` - runs linter to check for lint errors
 
+## Results
+
+The account and albums are hardcoded. I tried tackling the hardest problem first: the file uploading. I knew the account editing and adding albums would be easier. The file upload works, but I've hardcoded the file viewing to only the first image in that album. The image doesn't actually show. I haven't figured that one out yet.
 
 ## Retrospec/Improvements
 
@@ -42,4 +45,3 @@ and then go to http://localhost:8000
 1. I haven't used server-side rendering before so I think i made some of that wonky
 1. I was hoping to also have working tests … but time
 1. Using docker sounded like a good idea at first, but it turned out to make my cycle time between tries like almost 3-5 minutes … ouch
-1. Results: The account and albums are hardcoded. I tried tackling the hardest problem first: the file uploading. I knew the account editing and adding albums would be easier. The file upload works, but I've hardcoded the file viewing to only the first image in that album. The image doesn't actually show. I haven't figured that one out yet.
