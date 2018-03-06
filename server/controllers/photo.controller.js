@@ -28,7 +28,9 @@ export function getPhotosInAlbum(req, res) {
  * @returns void
  */
 export function addPhoto(req, res) {
-  if (!req.body.photo.userEmail || !req.body.photo.album || !req.body.photo.file) {
+  console.log(req.body)
+  console.log(req.params)
+  if (!req.body.photo.userID || !req.body.photo.album || !req.body.photo.file) {
     res.status(403).end()
   }
 

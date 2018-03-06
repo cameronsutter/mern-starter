@@ -13,13 +13,21 @@ class AlbumList extends Component {
     }
   }
 
-  renderAlbumLink = (album) => {
-    return <Link to={`albums/${album}`}>{album}</Link>
+  renderAlbumLink = (album, idx) => {
+    let id = this.props.account.id
+    return <li key={`album-${idx}`}>
+      <Link to={`albums/${id}/${album}`}>{album}</Link>
+    </li>
   }
 
   render () {
     let albums = this.props.account.albums.split('|')
-    return albums.map(this.renderAlbumLink)
+    return <div>
+      <h1>Your homes</h1>
+      <ul>
+        { albums.map(this.renderAlbumLink) }
+      </ul>
+    </div>
   }
 }
 

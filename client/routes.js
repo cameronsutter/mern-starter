@@ -59,7 +59,7 @@ export default (
       }}
     />
     <Route
-      path="/albums/:albumName"
+      path="/albums/:id/:albumName"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Album/AlbumDetails').default)

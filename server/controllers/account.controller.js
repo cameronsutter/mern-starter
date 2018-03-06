@@ -10,7 +10,6 @@ import sanitizeHtml from 'sanitize-html'
  * @returns an account
  */
 export function getAccount(req, res) {
-  console.log('server fetching account')
   Account.findOne({
     email: req.params.email,
   }).exec((err, account) => {
