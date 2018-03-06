@@ -1,3 +1,4 @@
+import path from 'path'
 import mongoose from 'mongoose'
 import { filePlugin, make_upload_to_model } from 'mongoose-file'
 const { Schema } = mongoose

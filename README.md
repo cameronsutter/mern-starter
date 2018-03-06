@@ -39,3 +39,4 @@ and then go to http://localhost:8000
 
 1. I started with a boilerplate project that included MongoDB (because I wanted to impress you with the fact that I learned MongoDB in a weekend). The boilerplate came with a lot of useless features that I didn't need for a small project. If I had been building it for production, I would have taken this approach, but for a small code challenge with very limited time, it wasn't the best approach
 1. I haven't used server-side rendering before so I think i made some of that wonky
+1. I was hoping to also have working tests … but time

@@ -1,4 +1,4 @@
-import Post from '../models/post'
+import Photo from '../models/photo'
 import cuid from 'cuid'
 import slug from 'limax'
 import sanitizeHtml from 'sanitize-html'

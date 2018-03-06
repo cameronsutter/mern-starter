@@ -18,7 +18,7 @@ export function Header(props, context) {
         </h1>
         {
           context.router.isActive('/', true)
-            ? <Link style={[styles['add-post-button']]} to="/account" >Account</Link>
+            ? <Link className={styles['account-button']} to="/account" >Account</Link>
             : null
         }
       </div>
