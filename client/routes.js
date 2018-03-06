@@ -30,7 +30,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Account/AccountDetails').default);
+          cb(null, require('./modules/Album/AlbumList').default);
         });
       }}
     />

@@ -7,12 +7,12 @@ import sanitizeHtml from 'sanitize-html'
  * Get the Account specified
  * @param req
  * @param res
- * @returns void
+ * @returns an account
  */
 export function getAccount(req, res) {
   console.log('server fetching account')
-  Photo.findOne({
-    email: req.body.email,
+  Account.findOne({
+    email: req.params.email,
   }).exec((err, account) => {
     if (err) {
       res.status(500).send(err)

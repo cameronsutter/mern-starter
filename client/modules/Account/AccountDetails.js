@@ -1,19 +1,25 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FormGroup, ControlLabel, Button } from 'react-bootstrap'
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 // Import Actions
 import { fetchAccount, editAccount } from './AccountActions'
 
 class AccountDetails extends Component {
-  componentWillMount () {
+  componentDidMount () {
     if (!this.props.account) {
       this.props.dispatch(fetchAccount('c@s.com'))
     }
   }
 
   handleEdit = () => {
-    this.props.dispatch(editAccount(account))
+    let newAttrs = {
+      firstName: this.refs.firstName.getValue(),
+      lastName: this.refs.lastName.getValue(),
+      username: this.refs.username.getValue(),
+    }
+    let newAccount = Object.assign({}, this.props.account, newAttrs)
+    this.props.dispatch(editAccount(newAccount))
   }
 
   render () {
@@ -27,20 +33,23 @@ class AccountDetails extends Component {
         >
           <ControlLabel>First Name</ControlLabel>
           <FormControl
+            ref='firstName'
             type="text"
-            value={account.firstName}
+            defaultValue={account.firstName}
             placeholder="first name"
           />
           <ControlLabel>Last Name</ControlLabel>
           <FormControl
+            ref='lastName'
             type="text"
-            value={account.lastName}
+            defaultValue={account.lastName}
             placeholder="last name"
           />
           <ControlLabel>Username</ControlLabel>
           <FormControl
+            ref='username'
             type="text"
-            value={account.username}
+            defaultValue={account.username}
             placeholder="username"
           />
         </FormGroup>
@@ -56,7 +65,7 @@ AccountDetails.need = [() => { return fetchAccount('c@s.com') }]
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    account: state.account.data,
   }
 }
 

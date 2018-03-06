@@ -6,8 +6,10 @@ const { Schema } = mongoose
 var uploads_base = path.join(__dirname, "uploads")
 var uploads = path.join(uploads_base, "u")
 
+console.log("upload path", uploads)
+
 const photoSchema = new Schema({
-  userEmail: { type: 'String', required: true },
+  userID: { type: 'String', required: true },
   album: { type: 'String', required: true },
   name: { type: 'String', required: false },
   caption: { type: 'String', required: false },

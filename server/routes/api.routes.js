@@ -5,13 +5,13 @@ import * as AccountController from '../controllers/account.controller';
 const router = new Router();
 
 // Get all Photos
-router.route('/photos/:album').get(PhotoController.getPhotosInAlbum)
+router.route('/photos/:id/:album').get(PhotoController.getPhotosInAlbum)
 
 // Add a new Photo
 router.route('/photos').post(PhotoController.addPhoto)
 
 // Get account by email
-router.route('/account').post(AccountController.getAccount)
+router.route('/account/:email').get(AccountController.getAccount)
 
 // Add a new account
 router.route('/account/new').post(AccountController.addAccount)

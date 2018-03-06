@@ -20,7 +20,7 @@ export function addAccount(account) {
 
 export function fetchAccount(email) {
   return (dispatch) => {
-    return callApi('account', 'get', {email}).then(res => {
+    return callApi(`account/${email}`).then(res => {
       dispatch(addAccount(res.account))
     })
   }

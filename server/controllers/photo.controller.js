@@ -7,11 +7,12 @@ import sanitizeHtml from 'sanitize-html'
  * Get all Photos in an Album
  * @param req
  * @param res
- * @returns void
+ * @returns array of photos
  */
 export function getPhotosInAlbum(req, res) {
   Photo.find({
-    album: req.body.album,
+    userID: req.params.id,
+    album: req.params.album,
   }).sort('-name').exec((err, photos) => {
     if (err) {
       res.status(500).send(err)
