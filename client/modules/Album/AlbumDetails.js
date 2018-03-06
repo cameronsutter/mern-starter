@@ -12,22 +12,22 @@ class AlbumDetails extends Component {
   }
 
   // Component method
-  handleFileUpload(event, obj, obj2, obj3) {
-    console.log(obj.target)
-    console.log(obj2)
-    console.log('3', obj3)
-    const { files } = obj
-    const file = files[0]
-    console.log(file)
-    this.props.dispatch(addNewPhoto(data: 'stuff', file))
+  handleFileUpload = (event) => {
+    const file = event.target.files[0]
+    let data = {
+      name: file.name,
+      userID: this.props.params.id,
+      album: this.props.params.albumName,
+    }
+    this.props.dispatch(addNewPhoto(data, file))
   }
 
   renderPhotos () {
-    return null
+    if (this.props.photos.length < 1) return null
+    return <img src={this.props.photos[0].url}/>
   }
 
   render () {
-    console.log('render', this.props.photos)
     return <div>
       <h1>{this.props.params.albumName}</h1>
       <form>
@@ -52,8 +52,9 @@ AlbumDetails.need = [params => { return fetchAlbumPhotos(params.id, params.album
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
+  console.log('mapStateToProps', state.photos)
   let photos = []
-  if (state.photos) {
+  if (state.photos && state.photos.length > 0) {
     photos = state.photos.filter(ph => ph.album === props.params.albumName)
   }
   return {

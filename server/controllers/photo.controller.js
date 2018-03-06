@@ -17,7 +17,8 @@ export function getPhotosInAlbum(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    res.json({ photos })
+    console.log('server response', photos[0].file)
+    res.sendFile(photos[0].file.path)
   })
 }
 
@@ -25,21 +26,25 @@ export function getPhotosInAlbum(req, res) {
  * Save a new Photo
  * @param req
  * @param res
- * @returns void
+ * @returns the new photo
  */
 export function addPhoto(req, res) {
   console.log(req.body)
-  console.log(req.params)
-  if (!req.body.photo.userID || !req.body.photo.album || !req.body.photo.file) {
+  console.log(req.file)
+  if (!req.body.userID || !req.body.album || !req.file) {
     res.status(403).end()
   }
 
-  const newPhoto = new Photo(req.body.photo);
+  let attrs = {
+    ...req.body,
+    file: req.file,
+  }
+
+  const newPhoto = new Photo(attrs)
 
   // sanitize inputs
   newPhoto.name = sanitizeHtml(newPhoto.name)
   newPhoto.album = sanitizeHtml(newPhoto.album)
-  newPhoto.caption = sanitizeHtml(newPhoto.caption)
 
   newPhoto.save((err, saved) => {
     if (err) {

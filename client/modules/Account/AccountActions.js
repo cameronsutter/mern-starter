@@ -1,4 +1,4 @@
-import callApi from '../../util/apiCaller'
+import { callApi } from '../../util/apiCaller'
 
 // Export Constants
 export const EDIT_ACCOUNT = 'EDIT_ACCOUNT'

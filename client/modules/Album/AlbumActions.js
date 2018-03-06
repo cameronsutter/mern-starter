@@ -1,38 +1,36 @@
-import callApi from '../../util/apiCaller'
+import { callApi, uploadFile } from '../../util/apiCaller'
 
 // Export Constants
-export const ADD_ALBUMS = 'ADD_ALBUMS'
 export const ADD_PHOTO = 'ADD_PHOTO'
 
-export function addAlbums(albums) {
-  return {
-    type: ADD_ALBUMS,
-    albums,
-  }
-}
-
-export function addPhoto(photo) {
+export function addPhoto(album, name, url) {
   return {
     type: ADD_PHOTO,
-    photo,
+    album,
+    name,
+    url,
   }
 }
 
 export function fetchAlbumPhotos(id, album) {
   return (dispatch) => {
     return callApi(`photos/${id}/${album}`).then(res => {
-      dispatch(addAlbums(res.albums))
+      let blob = new Blob([res], {type: 'image/jpeg'})
+      let imageURL = URL.createObjectURL(blob)
+      dispatch(addPhoto(album, 'img', imageURL))
     })
   }
 }
 
-export function addNewPhoto(data, file) {
+export function addNewPhoto(metaData, file) {
   let data = new FormData()
   data.append('file', file)
-  data.append('name', data)
+  data.append('name', file.name)
+  data.append('userID', metaData.userID)
+  data.append('album', metaData.album)
   return (dispatch) => {
-    return callApi('photos', 'post', {data}).then(res => {
-      dispatch(addPhoto(res.photo))
+    return uploadFile('photos', data).then(res => {
+      dispatch(addPhoto(metaData.album, file.name, res.data))
     })
   }
 }

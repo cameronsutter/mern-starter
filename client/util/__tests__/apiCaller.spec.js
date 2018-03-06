@@ -1,5 +1,5 @@
 import test from 'ava';
-import callApi, { API_URL } from '../apiCaller';
+import { callApi }, { API_URL } from '../apiCaller';
 import nock from 'nock';
 
 test('method defaults to GET', t => {

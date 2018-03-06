@@ -1,14 +1,19 @@
-import { Router } from 'express';
-import * as PostController from '../controllers/post.controller';
-import * as PhotoController from '../controllers/photo.controller';
-import * as AccountController from '../controllers/account.controller';
-const router = new Router();
+import path from 'path'
+import { Router } from 'express'
+import * as PostController from '../controllers/post.controller'
+import * as PhotoController from '../controllers/photo.controller'
+import * as AccountController from '../controllers/account.controller'
+const router = new Router()
+var multer  = require('multer')
+var uploads_base = path.join(__dirname, '..', '..', "uploads")
+var uploads = path.join(uploads_base, "u")
+var upload = multer({ dest: uploads })
 
 // Get all Photos
 router.route('/photos/:id/:album').get(PhotoController.getPhotosInAlbum)
 
 // Add a new Photo
-router.route('/photos').post(PhotoController.addPhoto)
+router.route('/photos').post(upload.single('file'), PhotoController.addPhoto)
 
 // Get account by email
 router.route('/account/:email').get(AccountController.getAccount)
@@ -17,15 +22,15 @@ router.route('/account/:email').get(AccountController.getAccount)
 router.route('/account/new').post(AccountController.addAccount)
 
 // Get all Posts
-router.route('/posts').get(PostController.getPosts);
+router.route('/posts').get(PostController.getPosts)
 
 // Get one post by cuid
-router.route('/posts/:cuid').get(PostController.getPost);
+router.route('/posts/:cuid').get(PostController.getPost)
 
 // Add a new Post
-router.route('/posts').post(PostController.addPost);
+router.route('/posts').post(PostController.addPost)
 
 // Delete a post by cuid
-router.route('/posts/:cuid').delete(PostController.deletePost);
+router.route('/posts/:cuid').delete(PostController.deletePost)
 
-export default router;
+export default router

@@ -14,7 +14,7 @@ class AlbumList extends Component {
   }
 
   renderAlbumLink = (album, idx) => {
-    let id = this.props.account.id
+    let id = this.props.account._id
     return <li key={`album-${idx}`}>
       <Link to={`albums/${id}/${album}`}>{album}</Link>
     </li>

@@ -38,5 +38,8 @@ and then go to http://localhost:8000
 ## Retrospec/Improvements
 
 1. I started with a boilerplate project that included MongoDB (because I wanted to impress you with the fact that I learned MongoDB in a weekend). The boilerplate came with a lot of useless features that I didn't need for a small project. If I had been building it for production, I would have taken this approach, but for a small code challenge with very limited time, it wasn't the best approach
+1. I spent about 8-10 hours on this, but i severely underestimated some of the challenges and spent too much time at first reading about the tools and not enough time figuring out how to build with them
 1. I haven't used server-side rendering before so I think i made some of that wonky
 1. I was hoping to also have working tests … but time
+1. Using docker sounded like a good idea at first, but it turned out to make my cycle time between tries like almost 3-5 minutes … ouch
+1. Results: The account and albums are hardcoded. I tried tackling the hardest problem first: the file uploading. I knew the account editing and adding albums would be easier. The file upload works, but I've hardcoded the file viewing to only the first image in that album. The image doesn't actually show. I haven't figured that one out yet.
