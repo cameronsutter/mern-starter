@@ -8,7 +8,7 @@ docker-compose -f docker-compose-development.yml build
 docker-compose -f docker-compose-development.yml up
 ```
 and then go to your docker ip address url @ port 8000
-or 
+or
 `redy.docker`
 
 ### Non-docker:
@@ -33,3 +33,9 @@ and then go to http://localhost:8000
 5. `npm run cover` - generates test coverage report
 
 6. `npm run lint` - runs linter to check for lint errors
+
+
+## Retrospec/Improvements
+
+1. I started with a boilerplate project that included MongoDB (because I wanted to impress you with the fact that I learned MongoDB in a weekend). The boilerplate came with a lot of useless features that I didn't need for a small project. If I had been building it for production, I would have taken this approach, but for a small code challenge with very limited time, it wasn't the best approach
+1. I haven't used server-side rendering before so I think i made some of that wonky

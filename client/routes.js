@@ -18,6 +18,9 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/Post/pages/PostListPage/PostListPage');
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
+  require('./modules/Account/AccountDetails')
+  require('./modules/Album/AlbumList')
+  require('./modules/Album/AlbumDetails')
 }
 
 // react-router setup with code-splitting
@@ -39,5 +42,29 @@ export default (
         });
       }}
     />
+    <Route
+      path="/account"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Account/AccountDetails').default)
+        })
+      }}
+    />
+    <Route
+      path="/albums"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Album/AlbumList').default)
+        })
+      }}
+    />
+    <Route
+      path="/albums/:albumName"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Album/AlbumDetails').default)
+        })
+      }}
+    />
   </Route>
-);
+)
