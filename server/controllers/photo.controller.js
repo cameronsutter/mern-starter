@@ -61,6 +61,6 @@ export function addPhoto(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    res.json({ photo: `http://redy.docker/api/photos/${req.file.pathname}?type=${req.file.mimetype}` })
+    res.json({ photo: `http://redy.docker/api/photos/${req.file.filename}?type=${req.file.mimetype}` })
   });
 }

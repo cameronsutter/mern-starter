@@ -42,7 +42,7 @@ export function addNewPhoto(metaData, file) {
   data.append('album', metaData.album)
   return (dispatch) => {
     return uploadFile('photos', data).then(res => {
-      dispatch(addPhoto(metaData.album, file.name, res.data))
+      dispatch(addPhoto(metaData.album, file.name, res.data.photo))
     })
   }
 }

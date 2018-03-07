@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 // Import Style
-import styles from './App.css';
+import styles from './Homepage.css';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -13,7 +13,7 @@ import Footer from './components/Footer/Footer';
 // Import Actions
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
-export class App extends Component {
+export class Homepage extends Component {
   constructor(props) {
     super(props)
     this.state = { isMounted: false }
@@ -31,7 +31,7 @@ export class App extends Component {
         <div>
           <Helmet
             title="The Red Y"
-            titleTemplate="%s - App"
+            titleTemplate="%s - Homepage"
             meta={[
               { charset: 'utf-8' },
               {
@@ -58,7 +58,7 @@ export class App extends Component {
   }
 }
 
-App.propTypes = {
+Homepage.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
@@ -71,4 +71,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Homepage);
