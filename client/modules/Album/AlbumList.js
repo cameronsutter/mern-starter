@@ -8,7 +8,6 @@ import { fetchAccount, addAlbum } from '../Account/AccountActions'
 
 import styles from './Album.css'
 
-
 class AlbumList extends Component {
   componentWillMount () {
     if (!this.props.account) {
@@ -17,7 +16,6 @@ class AlbumList extends Component {
   }
 
   handleAddAlbum = () => {
-    console.log(this.newAlbumRef)
     let newAlbum = this.newAlbumRef.value
     if (newAlbum) this.props.dispatch(addAlbum(this.props.account.email, newAlbum))
   }
@@ -30,16 +28,17 @@ class AlbumList extends Component {
   }
 
   render () {
-    let albums = this.props.account.albums.split('|')
+    const { albums, username } = this.props.account
+    let renderedAlbums = albums.split('|').map(this.renderAlbumLink)
     return <div>
-      <h1>Your homes</h1>
+      <h1>{`${username}\'s`} homes</h1>
       <div className={styles['album_list']}>
         <FormControl className={styles.input} inputRef={ref => { this.newAlbumRef = ref }} type="text" />
         <Button bsStyle='danger' onClick={this.handleAddAlbum}>Add</Button>
       </div>
       <hr/>
       <ul>
-        { albums.map(this.renderAlbumLink) }
+        { renderedAlbums }
       </ul>
     </div>
   }

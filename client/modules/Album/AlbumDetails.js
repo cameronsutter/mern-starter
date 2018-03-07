@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 import { fetchAlbumPhotos, addNewPhoto } from './AlbumActions'
@@ -26,7 +27,7 @@ class AlbumDetails extends Component {
   renderPhotos () {
     if (this.props.photos.length < 1) return null
     return this.props.photos.map((ph, idx) => {
-      return <div className={styles['img-wrapper']} key={idx}>
+      return <div className={styles['img_wrapper']} key={idx}>
         <img className={styles.img} src={ph.url}/>
       </div>
     })
@@ -35,6 +36,8 @@ class AlbumDetails extends Component {
   render () {
     return <div>
       <h1>{this.props.params.albumName}</h1>
+      <Link to={'/'}>Back to Albums</Link>
+      <hr/>
       <form>
         <FormGroup>
           <ControlLabel>Upload a file</ControlLabel>

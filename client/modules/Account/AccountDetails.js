@@ -14,9 +14,9 @@ class AccountDetails extends Component {
 
   handleEdit = () => {
     let newAttrs = {
-      firstName: this.refs.firstName.getValue(),
-      lastName: this.refs.lastName.getValue(),
-      username: this.refs.username.getValue(),
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      username: this.username.value,
     }
     let newAccount = Object.assign({}, this.props.account, newAttrs)
     this.props.dispatch(editAccount(newAccount))
@@ -37,6 +37,7 @@ class AccountDetails extends Component {
             type="text"
             defaultValue={account.firstName}
             placeholder="first name"
+            inputRef={ref => { this.firstName = ref }}
           />
           <ControlLabel>Last Name</ControlLabel>
           <FormControl
@@ -44,6 +45,7 @@ class AccountDetails extends Component {
             type="text"
             defaultValue={account.lastName}
             placeholder="last name"
+            inputRef={ref => { this.lastName = ref }}
           />
           <ControlLabel>Username</ControlLabel>
           <FormControl
@@ -51,6 +53,7 @@ class AccountDetails extends Component {
             type="text"
             defaultValue={account.username}
             placeholder="username"
+            inputRef={ref => { this.username = ref }}
           />
         </FormGroup>
       </form>

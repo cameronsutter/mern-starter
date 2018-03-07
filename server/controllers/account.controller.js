@@ -77,3 +77,31 @@ export function addAlbum(req, res) {
     })
   })
 }
+
+export function editAccount(req, res) {
+  if (!req.body.account || !req.body.account.email) {
+    res.status(403).end()
+    return
+  }
+
+  Account.findOne({
+    email: req.body.account.email,
+  }).exec((err, account) => {
+    if (err) {
+      res.status(500).send(err)
+      return
+    }
+
+    let newAccount = req.body.account
+    account.firstName = sanitizeHtml(newAccount.firstName)
+    account.lastName = sanitizeHtml(newAccount.lastName)
+    account.username = sanitizeHtml(newAccount.username)
+
+    account.save((err, saved) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+      res.json({ account: saved })
+    })
+  })
+}

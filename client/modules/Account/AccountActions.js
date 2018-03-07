@@ -5,10 +5,12 @@ export const EDIT_ACCOUNT = 'EDIT_ACCOUNT'
 export const ADD_ACCOUNT = 'ADD_ACCOUNT'
 export const EDIT_ALBUMS = 'EDIT_ALBUMS'
 
-export function editAccount(account) {
+export function editAccountAction(account) {
   return {
     type: EDIT_ACCOUNT,
-    account,
+    firstName: account.firstName,
+    lastName: account.lastName,
+    username: account.username,
   }
 }
 
@@ -46,6 +48,14 @@ export function addAlbum(email, album) {
   return (dispatch) => {
     return callApi('account/albums', 'post', {email, album}).then(res => {
       dispatch(editAlbums(res.albums))
+    })
+  }
+}
+
+export function editAccount(account) {
+  return (dispatch) => {
+    return callApi('account', 'post', {account}).then(res => {
+      dispatch(editAccountAction(res.account))
     })
   }
 }

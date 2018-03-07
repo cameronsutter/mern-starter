@@ -12,7 +12,12 @@ const AccountReducer = (state = initialState, action) => {
 
     case EDIT_ACCOUNT :
       return {
-        data: action.account,
+        data: {
+          ...state.data,
+          firstName: action.firstName,
+          lastName: action.lastName,
+          username: action.username,
+        }
       }
 
     case EDIT_ALBUMS:
