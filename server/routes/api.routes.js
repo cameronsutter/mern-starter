@@ -24,6 +24,9 @@ router.route('/account/:email').get(AccountController.getAccount)
 // Add a new account
 router.route('/account/new').post(AccountController.addAccount)
 
+// Add an album
+router.route('/account/albums').post(AccountController.addAlbum)
+
 // Get all Posts
 router.route('/posts').get(PostController.getPosts)
 

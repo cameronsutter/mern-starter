@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { Button, FormControl } from 'react-bootstrap'
 
 import { fetchAlbums } from './AlbumActions'
-import { fetchAccount } from '../Account/AccountActions'
+import { fetchAccount, addAlbum } from '../Account/AccountActions'
+
+import styles from './Album.css'
 
 
 class AlbumList extends Component {
@@ -11,6 +14,12 @@ class AlbumList extends Component {
     if (!this.props.account) {
       this.props.dispatch(fetchAccount('c@s.com'))
     }
+  }
+
+  handleAddAlbum = () => {
+    console.log(this.newAlbumRef)
+    let newAlbum = this.newAlbumRef.value
+    if (newAlbum) this.props.dispatch(addAlbum(this.props.account.email, newAlbum))
   }
 
   renderAlbumLink = (album, idx) => {
@@ -24,6 +33,11 @@ class AlbumList extends Component {
     let albums = this.props.account.albums.split('|')
     return <div>
       <h1>Your homes</h1>
+      <div className={styles['album_list']}>
+        <FormControl className={styles.input} inputRef={ref => { this.newAlbumRef = ref }} type="text" />
+        <Button bsStyle='danger' onClick={this.handleAddAlbum}>Add</Button>
+      </div>
+      <hr/>
       <ul>
         { albums.map(this.renderAlbumLink) }
       </ul>

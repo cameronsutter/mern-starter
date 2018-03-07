@@ -1,4 +1,4 @@
-import { ADD_ACCOUNT, EDIT_ACCOUNT } from './AccountActions'
+import { ADD_ACCOUNT, EDIT_ACCOUNT, EDIT_ALBUMS } from './AccountActions'
 
 // Initial State
 const initialState = { data: [] }
@@ -13,6 +13,14 @@ const AccountReducer = (state = initialState, action) => {
     case EDIT_ACCOUNT :
       return {
         data: action.account,
+      }
+
+    case EDIT_ALBUMS:
+      return {
+        data: {
+          ...state.data,
+          albums: action.albums,
+        }
       }
 
     default:

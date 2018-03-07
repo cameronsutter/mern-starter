@@ -3,6 +3,7 @@ import { callApi } from '../../util/apiCaller'
 // Export Constants
 export const EDIT_ACCOUNT = 'EDIT_ACCOUNT'
 export const ADD_ACCOUNT = 'ADD_ACCOUNT'
+export const EDIT_ALBUMS = 'EDIT_ALBUMS'
 
 export function editAccount(account) {
   return {
@@ -18,6 +19,13 @@ export function addAccount(account) {
   }
 }
 
+export function editAlbums(albums) {
+  return {
+    type: EDIT_ALBUMS,
+    albums,
+  }
+}
+
 export function fetchAccount(email) {
   return (dispatch) => {
     return callApi(`account/${email}`).then(res => {
@@ -30,6 +38,14 @@ export function newAccount(account) {
   return (dispatch) => {
     return callApi('account/new', 'post', {account}).then(res => {
       dispatch(addAccount(res.account))
+    })
+  }
+}
+
+export function addAlbum(email, album) {
+  return (dispatch) => {
+    return callApi('account/albums', 'post', {email, album}).then(res => {
+      dispatch(editAlbums(res.albums))
     })
   }
 }

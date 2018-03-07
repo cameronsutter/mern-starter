@@ -54,7 +54,7 @@ class AccountDetails extends Component {
           />
         </FormGroup>
       </form>
-      <Button onClick={this.handleEdit}>Change Account</Button>
+      <Button bsStyle='danger' onClick={this.handleEdit}>Update Account Details</Button>
     </div>
   }
 }

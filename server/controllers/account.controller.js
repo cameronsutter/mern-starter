@@ -15,6 +15,7 @@ export function getAccount(req, res) {
   }).exec((err, account) => {
     if (err) {
       res.status(500).send(err)
+      return
     }
     res.json({ account })
   })
@@ -29,6 +30,7 @@ export function getAccount(req, res) {
 export function addAccount(req, res) {
   if (!req.body.account.email || !req.body.account.password) {
     res.status(403).end()
+    return
   }
 
   //hash the password
@@ -44,6 +46,34 @@ export function addAccount(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    res.json({ photo: saved })
-  });
+    res.json({ account: saved })
+  })
+}
+
+export function addAlbum(req, res) {
+  if (!req.body.email || !req.body.album) {
+    res.status(403).end()
+    return
+  }
+
+  Account.findOne({
+    email: req.body.email,
+  }).exec((err, account) => {
+    if (err) {
+      res.status(500).send(err)
+      return
+    }
+
+    let newAlbum = sanitizeHtml(req.body.album)
+    let albums = account.albums
+    let newAlbums = `${albums}|${newAlbum}`
+    account.albums = newAlbums
+
+    account.save((err, saved) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+      res.json({ albums: newAlbums })
+    })
+  })
 }
