@@ -15,6 +15,9 @@ router.route('/photos/:id/:album').get(PhotoController.getPhotosInAlbum)
 // Add a new Photo
 router.route('/photos').post(upload.single('file'), PhotoController.addPhoto)
 
+// get a photo
+router.route('/photos/:fileName').get(PhotoController.getPhoto)
+
 // Get account by email
 router.route('/account/:email').get(AccountController.getAccount)
 

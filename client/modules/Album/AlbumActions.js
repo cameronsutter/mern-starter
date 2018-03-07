@@ -2,6 +2,7 @@ import { callApi, uploadFile } from '../../util/apiCaller'
 
 // Export Constants
 export const ADD_PHOTO = 'ADD_PHOTO'
+export const ADD_PHOTOS = 'ADD_PHOTOS'
 
 export function addPhoto(album, name, url) {
   return {
@@ -12,12 +13,23 @@ export function addPhoto(album, name, url) {
   }
 }
 
+export function addPhotos(array) {
+  return {
+    type: ADD_PHOTOS,
+    array,
+  }
+}
+
 export function fetchAlbumPhotos(id, album) {
   return (dispatch) => {
     return callApi(`photos/${id}/${album}`).then(res => {
-      let blob = new Blob([res], {type: 'image/jpeg'})
-      let imageURL = URL.createObjectURL(blob)
-      dispatch(addPhoto(album, 'img', imageURL))
+      let photos = res.map(url => {
+        return {
+          album,
+          url,
+        }
+      })
+      dispatch(addPhotos(photos))
     })
   }
 }

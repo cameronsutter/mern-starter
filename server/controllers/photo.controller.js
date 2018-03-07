@@ -2,6 +2,10 @@ import Photo from '../models/photo'
 import cuid from 'cuid'
 import slug from 'limax'
 import sanitizeHtml from 'sanitize-html'
+import path from 'path'
+
+var uploads_base = path.join(__dirname, '..', '..', "uploads")
+var uploads = path.join(uploads_base, "u")
 
 /**
  * Get all Photos in an Album
@@ -17,9 +21,18 @@ export function getPhotosInAlbum(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    console.log('server response', photos[0].file)
-    res.sendFile(photos[0].file.path)
+    let list = photos.map(ph => {
+      return `http://redy.docker/api/photos/${ph.file.filename}?type=${ph.file.mimetype}`
+    })
+    res.json(list)
   })
+}
+
+export function getPhoto(req, res) {
+  let fileName = req.params.fileName
+  let type = req.query && req.query.type
+  res.type(type)
+  res.sendFile(`${uploads}/${fileName}`)
 }
 
 /**
@@ -29,8 +42,6 @@ export function getPhotosInAlbum(req, res) {
  * @returns the new photo
  */
 export function addPhoto(req, res) {
-  console.log(req.body)
-  console.log(req.file)
   if (!req.body.userID || !req.body.album || !req.file) {
     res.status(403).end()
   }
@@ -50,6 +61,6 @@ export function addPhoto(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    res.json({ photo: saved })
+    res.json({ photo: `http://redy.docker/api/photos/${req.file.pathname}?type=${req.file.mimetype}` })
   });
 }

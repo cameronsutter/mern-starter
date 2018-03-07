@@ -1,4 +1,4 @@
-import { ADD_ALBUMS, ADD_PHOTO } from './AlbumActions'
+import { ADD_PHOTOS, ADD_PHOTO } from './AlbumActions'
 
 // Initial State
 const initialState = []
@@ -6,8 +6,6 @@ const initialState = []
 const AlbumReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PHOTO :
-      console.log('reducer')
-      console.log(action)
       return [
         ...state,
         {
@@ -15,6 +13,12 @@ const AlbumReducer = (state = initialState, action) => {
           album: action.album,
           url: action.url,
         }
+      ]
+
+    case ADD_PHOTOS:
+      return [
+        ...state,
+        ...action.array,
       ]
 
     default:

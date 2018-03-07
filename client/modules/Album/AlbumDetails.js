@@ -4,6 +4,8 @@ import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 import { fetchAlbumPhotos, addNewPhoto } from './AlbumActions'
 
+import styles from './Album.css'
+
 class AlbumDetails extends Component {
   componentDidMount () {
     if (this.props.photos.length < 1) {
@@ -11,7 +13,6 @@ class AlbumDetails extends Component {
     }
   }
 
-  // Component method
   handleFileUpload = (event) => {
     const file = event.target.files[0]
     let data = {
@@ -24,7 +25,11 @@ class AlbumDetails extends Component {
 
   renderPhotos () {
     if (this.props.photos.length < 1) return null
-    return <img src={this.props.photos[0].url}/>
+    return this.props.photos.map((ph, idx) => {
+      return <div className={styles['img-wrapper']} key={idx}>
+        <img className={styles.img} src={ph.url}/>
+      </div>
+    })
   }
 
   render () {
@@ -40,7 +45,8 @@ class AlbumDetails extends Component {
           />
         </FormGroup>
       </form>
-      <div className='photos__container'>
+      <hr/>
+      <div className={styles['photos_container']}>
         { this.renderPhotos() }
       </div>
     </div>
@@ -52,7 +58,6 @@ AlbumDetails.need = [params => { return fetchAlbumPhotos(params.id, params.album
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
-  console.log('mapStateToProps', state.photos)
   let photos = []
   if (state.photos && state.photos.length > 0) {
     photos = state.photos.filter(ph => ph.album === props.params.albumName)
