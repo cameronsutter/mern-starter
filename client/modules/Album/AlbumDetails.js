@@ -36,7 +36,7 @@ class AlbumDetails extends Component {
   render () {
     return <div>
       <h1>{this.props.params.albumName}</h1>
-      <Link to={'/'}>Back to Albums</Link>
+      <Link to={'/albums'}>Back to Albums</Link>
       <hr/>
       <form>
         <FormGroup>

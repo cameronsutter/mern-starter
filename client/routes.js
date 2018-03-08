@@ -1,13 +1,13 @@
 /* eslint-disable global-require */
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './modules/App/App';
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
+import App from './modules/App/App'
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
-    callback(require);
-  };
+    callback(require)
+  }
 }
 
 /* Workaround for async react routes to work with react-hot-reloader till
@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Account/AccountDetails')
   require('./modules/Album/AlbumList')
   require('./modules/Album/AlbumDetails')
+  require('./modules/App/Homepage')
 }
 
 // react-router setup with code-splitting
@@ -28,8 +29,8 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Album/AlbumList').default);
-        });
+          cb(null, require('./modules/App/Homepage').default)
+        })
       }}
     />
     <Route

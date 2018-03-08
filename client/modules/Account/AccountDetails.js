@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 // Import Actions
@@ -8,7 +9,7 @@ import { fetchAccount, editAccount } from './AccountActions'
 class AccountDetails extends Component {
   componentDidMount () {
     if (!this.props.account) {
-      this.props.dispatch(fetchAccount('c@s.com'))
+      this.props.dispatch(fetchAccount('cam@redx.com')) // hardcoded because of server rendering
     }
   }
 
@@ -27,6 +28,7 @@ class AccountDetails extends Component {
     const { account } = this.props
     return <div>
       <h1>{account.email}</h1>
+      <Link to={'/albums'}>Back Home</Link>
       <form>
         <FormGroup>
           <ControlLabel>First Name</ControlLabel>
@@ -58,7 +60,7 @@ class AccountDetails extends Component {
 }
 
 // Actions required to provide data for this component to render server side.
-AccountDetails.need = [() => { return fetchAccount('c@s.com') }]
+AccountDetails.need = [() => { return fetchAccount('cam@redx.com') }]
 
 // Retrieve data from store as props
 function mapStateToProps(state) {

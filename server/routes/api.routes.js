@@ -16,13 +16,16 @@ router.route('/photos/:id/:album').get(auth, PhotoController.getPhotosInAlbum)
 router.route('/photos').post(auth, upload.single('file'), PhotoController.addPhoto)
 
 // get a photo
-router.route('/photos/:fileName').get(auth, PhotoController.getPhoto)
+router.route('/photos/:fileName').get(PhotoController.getPhoto) // no auth ... not ideal
 
 // Get account by email
 router.route('/account/:email').get(auth, AccountController.getAccount)
 
 // Add a new account
-router.route('/account/new').post(auth, AccountController.addAccount)
+router.route('/account/new').post(AccountController.addAccount)
+
+//log in an account
+router.route('/account/login').post(AccountController.loginAccount)
 
 // edit account
 router.route('/account').post(auth, AccountController.editAccount)

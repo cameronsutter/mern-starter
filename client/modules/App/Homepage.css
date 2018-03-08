@@ -1,8 +1,9 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .left {
   border-right: 1px solid #888;
+  padding-right: 150px;
 }

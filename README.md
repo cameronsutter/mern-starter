@@ -9,7 +9,7 @@ docker-compose -f docker-compose-development.yml up
 ```
 and then go to your docker ip address url @ port 8000
 or
-`redy.docker`
+`http://redy.docker`
 
 ### Non-docker:
 ```
@@ -38,7 +38,12 @@ and then go to http://localhost:8000
 
 ## Results
 
-The account and albums are hardcoded. I tried tackling the hardest problem first: the file uploading. I knew the account editing and adding albums would be easier. The file upload works.
+- Create an account and login via username/password
+- Update their profile (first name, last name, etc.)
+- Upload photos to albums and browse through them
+- Logout
+
+There is some wonkiness with the routing because of server-side rendering that I didn't get a chance to fix. Most times you'll have to make sure to start from the root url (/) to make things work
 
 ## Retrospec/Improvements
 
@@ -49,3 +54,4 @@ The account and albums are hardcoded. I tried tackling the hardest problem first
 1. Using docker sounded like a good idea at first, but it turned out to make my cycle time between tries like almost 3-5 minutes ... ouch. I could have looked into why the webpack watcher wasn't working, but instead of going down that rabbit hole like i would have for a production app, I opted to focus on functionality. In retrospect, that may have been a bad choice.
 1. There's no security/authentication ... there's no way that would fly in production
 1. error handling is very minimal ... that would be improved for production
+1. At the last minute something wasn't working with the jwt tokens so i had to comment them out and use a hard-coded token ... definitely not ok for production
