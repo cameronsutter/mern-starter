@@ -52,6 +52,6 @@ There is some wonkiness with the routing because of server-side rendering that I
 1. I haven't used server-side rendering before so I think i made some of that wonky
 1. I was hoping to also have working tests ... but time
 1. Using docker sounded like a good idea at first, but it turned out to make my cycle time between tries like almost 3-5 minutes ... ouch. I could have looked into why the webpack watcher wasn't working, but instead of going down that rabbit hole like i would have for a production app, I opted to focus on functionality. In retrospect, that may have been a bad choice.
-1. There's no security/authentication ... there's no way that would fly in production
+1. There's very limited security/authentication ... there's no way that would fly in production
 1. error handling is very minimal ... that would be improved for production
 1. At the last minute something wasn't working with the jwt tokens so i had to comment them out and use a hard-coded token ... definitely not ok for production
