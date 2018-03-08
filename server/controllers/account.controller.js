@@ -1,7 +1,9 @@
 import Account from '../models/account'
-import cuid from 'cuid'
-import slug from 'limax'
 import sanitizeHtml from 'sanitize-html'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
+export const sekrit = 'a39e99e9cne9e8eu7rbcu8w9ee7wwu7265e' // not very secret
 
 /**
  * Get the Account specified
@@ -34,20 +36,23 @@ export function addAccount(req, res) {
   }
 
   //hash the password
+  bcrypt.hash(req.body.account.password, 10, function(err, hash) {
+    const newAccount = new Account(req.body.account)
 
-  const newAccount = new Account(req.body.account)
+    // sanitize inputs
+    newAccount.firstName = sanitizeHtml(newAccount.firstName)
+    newAccount.lastName = sanitizeHtml(newAccount.lastName)
+    newAccount.username = sanitizeHtml(newAccount.username)
+    newAccount.password = hash
 
-  // sanitize inputs
-  newAccount.firstName = sanitizeHtml(newAccount.firstName)
-  newAccount.lastName = sanitizeHtml(newAccount.lastName)
-  newAccount.username = sanitizeHtml(newAccount.username)
-
-  newAccount.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-    res.json({ account: saved })
+    newAccount.save((err, saved) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+      res.json({ account: saved })
+    })
   })
+
 }
 
 export function addAlbum(req, res) {
@@ -102,6 +107,20 @@ export function editAccount(req, res) {
         res.status(500).send(err)
       }
       res.json({ account: saved })
+    })
+  })
+}
+
+export function loginAccount(req, res) {
+  bcrypt.compare(plainTextPassword, hashFromDB, function(err, res) {
+    // res == true
+
+    let payload = {
+      email: account.email,
+      expires: Math.round((new Date().getTime()/1000)) + 3600 // not using expiration for this project
+    }
+    jwt.sign(sekrit, payload, (err, token) => {
+
     })
   })
 }

@@ -28,12 +28,9 @@ class AccountDetails extends Component {
     return <div>
       <h1>{account.email}</h1>
       <form>
-        <FormGroup
-          controlId="formBasicText"
-        >
+        <FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
-            ref='firstName'
             type="text"
             defaultValue={account.firstName}
             placeholder="first name"
@@ -41,7 +38,6 @@ class AccountDetails extends Component {
           />
           <ControlLabel>Last Name</ControlLabel>
           <FormControl
-            ref='lastName'
             type="text"
             defaultValue={account.lastName}
             placeholder="last name"
@@ -49,7 +45,6 @@ class AccountDetails extends Component {
           />
           <ControlLabel>Username</ControlLabel>
           <FormControl
-            ref='username'
             type="text"
             defaultValue={account.username}
             placeholder="username"

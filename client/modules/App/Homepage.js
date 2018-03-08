@@ -1,74 +1,65 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 // Import Style
-import styles from './Homepage.css';
-
-// Import Components
-import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-
-// Import Actions
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+import styles from './Homepage.css'
 
 export class Homepage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isMounted: false }
-  }
-
-  componentDidMount() {
-    this.setState({isMounted: true}); // eslint-disable-line
-    window.devToolsExtension = true // i don't want to see it for now
-  }
-
   render() {
     return (
-      <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+      <div style={styles.container}>
+        <div style={styles.left}>
+          <h1>Login</h1>
+          <form>
+            <FormGroup>
+              <ControlLabel>email</ControlLabel>
+              <FormControl
+                type="email"
+                inputRef={ref => { this.loginEmail = ref }}
+              />
+              <ControlLabel>Password</ControlLabel>
+              <FormControl
+                type="password"
+                inputRef={ref => { this.loginPassword = ref }}
+              />
+            </FormGroup>
+          </form>
+          <Button bsStyle='danger' onClick={this.handleLogin}>Login</Button>
+        </div>
         <div>
-          <Helmet
-            title="The Red Y"
-            titleTemplate="%s - Homepage"
-            meta={[
-              { charset: 'utf-8' },
-              {
-                'http-equiv': 'X-UA-Compatible',
-                content: 'IE=edge',
-              },
-              {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-              },
-            ]}
-          />
-          <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-          />
-          <div className={styles.container}>
-            {this.props.children}
-          </div>
-          <Footer />
+          <h1>Create a new account</h1>
+          <form>
+            <FormGroup>
+              <ControlLabel>email</ControlLabel>
+              <FormControl
+                type="email"
+                inputRef={ref => { this.email = ref }}
+              />
+              <ControlLabel>First Name</ControlLabel>
+              <FormControl
+                type="text"
+                inputRef={ref => { this.firstName = ref }}
+              />
+              <ControlLabel>Last Name</ControlLabel>
+              <FormControl
+                type="text"
+                inputRef={ref => { this.lastName = ref }}
+              />
+              <ControlLabel>Username</ControlLabel>
+              <FormControl
+                type="text"
+                inputRef={ref => { this.username = ref }}
+              />
+              <ControlLabel>Password</ControlLabel>
+              <FormControl
+                type="password"
+                inputRef={ref => { this.password = ref }}
+              />
+            </FormGroup>
+          </form>
+          <Button bsStyle='danger' onClick={this.handleCreate}>Create</Button>
         </div>
       </div>
-    );
+    )
   }
 }
-
-Homepage.propTypes = {
-  children: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
-};
-
-// Retrieve data from store as props
-function mapStateToProps(state) {
-  return {
-    intl: state.intl,
-  }
-}
-
-export default connect(mapStateToProps)(Homepage);

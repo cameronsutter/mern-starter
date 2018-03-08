@@ -1,8 +1,7 @@
 import Photo from '../models/photo'
-import cuid from 'cuid'
-import slug from 'limax'
 import sanitizeHtml from 'sanitize-html'
 import path from 'path'
+import { API_URL } from '../../client/util/apiCaller'
 
 var uploads_base = path.join(__dirname, '..', '..', "uploads")
 var uploads = path.join(uploads_base, "u")
@@ -22,7 +21,7 @@ export function getPhotosInAlbum(req, res) {
       res.status(500).send(err)
     }
     let list = photos.map(ph => {
-      return `http://redy.docker/api/photos/${ph.file.filename}?type=${ph.file.mimetype}`
+      return `${API_URL}/photos/${ph.file.filename}?type=${ph.file.mimetype}`
     })
     res.json(list)
   })
@@ -61,6 +60,6 @@ export function addPhoto(req, res) {
     if (err) {
       res.status(500).send(err)
     }
-    res.json({ photo: `http://redy.docker/api/photos/${req.file.filename}?type=${req.file.mimetype}` })
+    res.json({ photo: `${API_URL}/photos/${req.file.filename}?type=${req.file.mimetype}` })
   });
 }

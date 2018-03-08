@@ -2,9 +2,9 @@ import fetch from 'isomorphic-fetch'
 import Config from '../../server/config'
 import axios, { post } from 'axios'
 
-export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
-  process.env.BASE_URL || ('http://redy.docker/api') :
-  'http://redy.docker/api';
+export const API_URL = (typeof window === 'undefined') ?
+  process.env.API_URL || 'http://localhost:8000/api' :
+  `${window.location.origin}/api`
 
 export function uploadFile(endpoint, file) {
   const config = {

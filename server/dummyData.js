@@ -8,7 +8,7 @@ export default function () {
     }
 
     const account1 = new Account({
-      email: 'c@s.com',
+      email: 'cam@redx.com',
       password: 'raphael',
       firstName: 'Cameron',
       lastName: 'Sutter',
